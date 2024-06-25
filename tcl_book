@@ -14,3 +14,6 @@ proc my_proc {args} {
 }
 set result [my_proc 1 2 3 4 5]
 puts "The sum of the numbers is $result."
+2.set
+set x 10
+set y 100 + x    //命令执行后，y的值是“100 + x”而不是我们期望的110
