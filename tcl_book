@@ -2,3 +2,15 @@ handbook :
 ug835-vivado-tcl-commands.pdf
 ug894-vivado-tcl-scripting.pdf
 https://www.w3cschool.cn/doc_tcl_tk/dict
+
+1.proc
+# 例如，定义一个过程，可以计算任意数量的和
+proc my_proc {args} {
+    set sum 0
+    foreach arg $args {
+        set sum [expr {$sum + $arg}]
+    }
+    return $sum
+}
+set result [my_proc 1 2 3 4 5]
+puts "The sum of the numbers is $result."
