@@ -14,6 +14,7 @@ proc my_proc {args} {
 }
 set result [my_proc 1 2 3 4 5]
 puts "The sum of the numbers is $result."
+其中 procedureName 为要创建的过程的名称，{args} 为过程的参数列表，用花括号括起来，多个参数之间用空格分隔。过程体是实现该过程功能的具体代码，可以包含多条 TCL 语句。如果要从过程中返回值，可以使用 return 命令。其中，$result 是将返回的值。
 2.set (置换命令可以当作C语言中的赋值来理解，但是又有点不一样，因为这个置换不需要定义类型，可以直接赋值)
 set x 10
 set y 100 + x    //命令执行后，y的值是“100 + x”而不是我们期望的110
