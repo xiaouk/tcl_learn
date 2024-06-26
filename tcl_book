@@ -144,4 +144,92 @@ argv0 abs: /Users/fh/fh_data/workspace/tcl/learn/parse_redisconf.tcl
 args abs: /Users/fh/fh_data/workspace/tcl/learn/redis.conf 
 fh@Feihu-3 learn % 
 
+局部变量
+
+局部变量在过程执行完毕返回时自动销毁，结束其生命周期。所以过程内定义的变量，在过程外无法访问。例如，下面例子中定义了过程add，调用过程add后，无法访问变量c，因为c是局部变量。
+
+% proc add {a b} {
+set c [expr $a+$b]
+}
+% add 3 4
+7
+% set c
+can't read "c": no such variable
+
+全局变量
+
+特指全局名字空间（::）中的全局变量
+
+举例如下
+
+定义了全局变量c，赋值2；
+
+% set c 2
+2
+
+定义过程add1，在过程中通过::c的方式使用了全局变量c；
+% proc add1 {a b} {
+set ::c [expr $a+$b]
+return $::c
+}
+
+调用过程add1
+% add1 3 4
+7
+
+之后查看全局变量c的值也随add1的调用改变。
+% set c
+7
+
+另外一种在过程中调用全局变量的方法
+
+% set c                              ;#c的初值为7
+7
+% proc add2 {a b} {    
+global c                             ;#引用全局变量c
+set c [expr $a+$b+$c]
+return $c
+}
+% add2 4 5                        ;#调用过程add2
+c
+% set c                                ;#调用过程add2后，c的值变成16
+16
+
+名字空间的变量
+
+也有全局和局部之分，与上面类似，只是名字空间不同。
+
+举例如下
+
+% set len 300
+300
+% set wid 100
+100
+
+% namespace eval cc {
+  variable len 30
+  variable wid 10
+  proc area {a b} {
+    variable len                          ;#引用名字空间cc的全局变量len和wid
+    variable wid
+    puts "$len,$wid\n"             ;#输出名字空间cc的全局变量len和wid
+    set area [expr $a*$b]
+    return $area
+  }
+}
+% cc::area $len $wid            ;#调用全局变量len和wid，注意与下面的差别  
+30,10
+
+30000
+% cc::area $cc::len $cc::wid  ;#调用名字空间cc的全局变量cc::len和cc::wid
+30,10
+
+300
+%
+
+总结 global关联的是全局名字空间（::）中的全局变量，
+
+          varible关联的是命令所在名字空间的全局变量。
+
+
 
