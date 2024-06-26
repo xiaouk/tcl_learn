@@ -2,6 +2,7 @@ handbook :
 ug835-vivado-tcl-commands.pdf
 ug894-vivado-tcl-scripting.pdf
 https://www.w3cschool.cn/doc_tcl_tk/dict
+Tcl_Tk入门经典(第2版).pdf
 
 1.proc
 # 例如，定义一个过程，可以计算任意数量的和
