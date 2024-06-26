@@ -129,3 +129,19 @@ file delete {*}[glob *.test]
 eval file delete [glob *.test]
 
 替换可以被使用的十分复杂，但是替换使用的原则应该是越简单越好。过于复杂的替换不但会降低程序的可靠性，而且不易于代码的阅读。当需要使用繁琐的指令时，最好能将指令拆成简单的语句，或者建立过程来完成相应功能。
+
+7.file normalize
+
+file normalize name接口可以将相对路径转换成绝对路径，但是如文档所说，存在软连接的情况，可能不是我们所预期的结果。
+测试代码如下：
+
+        set abs_path [file normalize $argv0]
+        puts "argv0 abs: $abs_path"
+        puts "args abs: [file normalize [lindex $argv 0]] "
+
+fh@Feihu-3 learn % ../learn/../learn/parse_redisconf.tcl  ../learn/../learn/../../tcl/learn/redis.conf 
+argv0 abs: /Users/fh/fh_data/workspace/tcl/learn/parse_redisconf.tcl
+args abs: /Users/fh/fh_data/workspace/tcl/learn/redis.conf 
+fh@Feihu-3 learn % 
+
+
