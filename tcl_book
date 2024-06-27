@@ -236,3 +236,8 @@ string equal ?-nocase? ?-length int? string1 string2
 
 把字符串string1和string2进行比较，如果两者相同，返回值为1，否则返回0 。
 
+string trim string ?chars?
+返回值为:从string字符串的首尾删除掉了字符集合chars中的字符后的字符串。如果没有给出
+chars，那么将删除掉spaces、tabs、newlines、carriage returns这些字符。例如:
+% string trim "abcde" {a d e}
+bc
